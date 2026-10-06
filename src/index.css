@@ -1,0 +1,118 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-ink: #0a0f0d;
+  --color-charcoal: #101815;
+  --color-ivory: #f5f1eb;
+  --color-beige: #e8e1d7;
+  --color-muted: #77746f;
+  --color-gold: #c5a073;
+
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-serif: 'Cormorant Garamond', ui-serif, Georgia, serif;
+  --font-script: 'Italianno', 'Cormorant Garamond', cursive;
+
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-ivory);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  section {
+    scroll-margin-top: 86px;
+  }
+
+  ::selection {
+    background: var(--color-gold);
+    color: #fff;
+  }
+}
+
+/* Small uppercase editorial label */
+.eyebrow {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 1s var(--ease-soft),
+    transform 1s var(--ease-soft);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Nav link underline that draws in on hover */
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  height: 1px;
+  width: 100%;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s var(--ease-soft);
+}
+
+.nav-link:hover::after,
+.nav-link:focus-visible::after {
+  transform: scaleX(1);
+}
+
+/* Arrow that glides on hover */
+.link-arrow .link-arrow__icon {
+  transition: transform 0.5s var(--ease-soft);
+}
+
+.link-arrow:hover .link-arrow__icon {
+  transform: translateX(6px);
+}
+
+/* Circular outline control */
+.circle-control {
+  transition:
+    background-color 0.45s var(--ease-soft),
+    color 0.45s var(--ease-soft),
+    border-color 0.45s var(--ease-soft),
+    transform 0.45s var(--ease-soft);
+}
+
+.circle-control:hover {
+  transform: scale(1.06);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
